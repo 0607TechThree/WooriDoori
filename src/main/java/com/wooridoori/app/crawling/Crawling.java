@@ -1,7 +1,13 @@
 package com.wooridoori.app.crawling;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import javax.imageio.ImageIO;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -22,6 +28,7 @@ public class Crawling {
 	public static void main(String[] args) {
 		final String url="https://www.idus.com"; // 상세
 		final String url2="https://www.idus.com/c/region/"; // 지역별
+		final String path = "D:\\0607KIM\\workspace\\WooriDoori\\src\\main\\webapp\\images\\crawling\\"; // 이미지 저장 경로 확인!!!
 		Document doc=null;
 		Document doc2=null;
 		ArrayList<String> urls = new ArrayList<String>();
@@ -67,12 +74,46 @@ public class Crawling {
 
 				System.out.println("클래스 이름 : "+itr2.next().text());
 				while(itr3.hasNext()) {
-					System.out.println("클래스 사진 : "+itr3.next().attr("style"));			
+					String imageName=itr3.next().attr("style");
+					int a=imageName.indexOf(")");
+					int b=imageName.lastIndexOf(".");
+					
+					String imageNameS=imageName.substring(22,a);
+					String imagePath = imageNameS;
+					BufferedImage image = null;
+					
+					System.out.println("클래스 사진 : "+imageName.substring(57,b)+".jpg");	
+					
+					try {
+						image = ImageIO.read(new URL(imagePath));
+					} catch (MalformedURLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					int width = image.getWidth();
+					int height = image.getHeight();
+					
+					String fileNm = imageName.substring(57,b)+".jpg";
+					
+					try {
+						// 저장할 이미지의 크기와 타입을 잡아줌.
+						BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_BGR);
+						bufferedImage.createGraphics().drawImage(image, 0, 0, null);
+
+						// 해당경로에 이미지를 저장함.
+						ImageIO.write(bufferedImage, "jpg", new File(path + fileNm));
+					} catch(Exception e) {
+						e.printStackTrace();
+					}
+
 				}
 				System.out.println("주소 : "+itr4.next().text());
-				while(itr5.hasNext()) {
-					System.out.println("카테고리 : "+itr5.next().text());
-				}
+				
+				System.out.println("카테고리 : "+itr5.next().text());
+				
 			}
 		}
 	}
