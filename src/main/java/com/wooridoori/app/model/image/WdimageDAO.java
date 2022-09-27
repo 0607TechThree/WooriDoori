@@ -16,7 +16,7 @@ public class WdimageDAO {
 	final String sql_selectAll="SELECT * FROM WDIMAGE";
 	final String sql_insert="INSERT INTO WDIMAGE VALUES((SELECT NVL(MAX(WDIPK),0) +1 FROM WDIMAGE),?,?)";
 	
-	void insertWdimage(WdimageVO vo) {
+	public void insertWdimage(WdimageVO vo) {
 		jdbcTemplate.update(sql_insert,vo.getWdopk(),vo.getWdipickname());
 	}
 	List<WdimageVO> selectAllWdimage(WdimageVO vo){
