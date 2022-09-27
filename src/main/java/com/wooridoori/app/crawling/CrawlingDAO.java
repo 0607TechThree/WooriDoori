@@ -36,8 +36,8 @@ public class CrawlingDAO {
 		try {
 			pstmt=conn.prepareStatement(sql_insert_I);
 			pstmt.setInt(1, vo.getWdipk());
-			pstmt.setInt(1, vo.getWdopk());
-			pstmt.setString(2, vo.getWdipickname());
+			pstmt.setInt(2, vo.getWdopk());
+			pstmt.setString(3, vo.getWdipickname());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
