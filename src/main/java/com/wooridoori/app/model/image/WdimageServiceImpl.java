@@ -9,7 +9,7 @@ public class WdimageServiceImpl implements WdimageService{
 	private WdimageDAO wdimageDAO;
 	@Override
 	public void insertWdimage(WdimageVO vo) {
-		wdimageDAO.insertWdimage(vo);	
+		//wdimageDAO.insertWdimage(vo);	
 	}
 
 	@Override

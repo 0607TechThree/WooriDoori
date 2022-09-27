@@ -14,11 +14,11 @@ public class WdimageDAO {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	final String sql_selectAll="SELECT * FROM WDIMAGE";
-	final String sql_insert="INSERT INTO WDIMAGE VALUES((SELECT NVL(MAX(WDIPK),0) +1 FROM WDIMAGE),?,?)";
-	
-	public void insertWdimage(WdimageVO vo) {
-		jdbcTemplate.update(sql_insert,vo.getWdopk(),vo.getWdipickname());
-	}
+//	final String sql_insert="INSERT INTO WDIMAGE VALUES((SELECT NVL(MAX(WDIPK),0) +1 FROM WDIMAGE),?,?)";
+
+//	public void insertWdimage(WdimageVO vo) {
+//		jdbcTemplate.update(sql_insert,vo.getWdopk(),vo.getWdipickname());
+//	}
 	List<WdimageVO> selectAllWdimage(WdimageVO vo){
 		return jdbcTemplate.query(sql_selectAll,new WdimageRowMapper());
 	}

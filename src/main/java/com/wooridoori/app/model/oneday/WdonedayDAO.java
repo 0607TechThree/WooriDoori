@@ -17,11 +17,11 @@ public class WdonedayDAO {
 	
 	final String sql_selectOne="SELECT * FROM WDONEDAY WHERE WDOPK = ?";
 	final String sql_selectAll="SELECT * FROM WDONEDAY";
-	final String sql_insert="INSERT INTO WDONEDAY VALUES((SELECT NVL(MAX(WDOPK),0) +1 FROM WDONEDAY),?,?,?,?)";
-	
-	public void insertWdoneday(WdonedayVO vo) {
-		jdbcTemplate.update(sql_insert,vo.getWdoname(),vo.getWdoregion(),vo.getWdoaddress(),vo.getWdosubject());
-	}
+//	final String sql_insert="INSERT INTO WDONEDAY VALUES((SELECT NVL(MAX(WDOPK),0) +1 FROM WDONEDAY),?,?,?,?)";
+
+//	public void insertWdoneday(WdonedayVO vo) {
+//		jdbcTemplate.update(sql_insert,vo.getWdoname(),vo.getWdoregion(),vo.getWdoaddress(),vo.getWdosubject());
+//	}
 	public WdonedayVO selectOneWdoneday(WdonedayVO vo) {
 		Object[] args= {vo.getWdopk()};
 		return jdbcTemplate.queryForObject(sql_selectOne,args,new WdonedayRowMapper());

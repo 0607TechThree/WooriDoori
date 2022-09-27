@@ -13,8 +13,7 @@ public class WdonedayServiceImpl implements WdonedayService{
 
 	@Override
 	public void insertWdoneday(WdonedayVO vo) {
-		wdonedayDAO.insertWdoneday(vo);
-		
+		//wdonedayDAO.insertWdoneday(vo);		
 	}
 
 	@Override
