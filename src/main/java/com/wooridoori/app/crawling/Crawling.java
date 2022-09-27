@@ -31,7 +31,7 @@ public class Crawling {
 	public static void main(String[] args) {
 		final String url="https://www.idus.com"; // 상세
 		final String url2="https://www.idus.com/c/region/"; // 지역별
-		final String path = "D:\\0607KIM\\workspace\\WooriDoori\\src\\main\\webapp\\images\\crawling\\"; // 이미지 저장 경로 확인!!!
+		final String path = "C:\\0607KEY\\workspace\\WooriDoori\\src\\main\\webapp\\images\\crwaling\\"; // 이미지 저장 경로 확인!!!
 		Document doc=null;
 		Document doc2=null;
 		
@@ -76,7 +76,7 @@ public class Crawling {
 			Iterator<Element> itr1 = e1.iterator();
 			while(itr1.hasNext()) {
 				WdonedayVO wdonedayVO=new WdonedayVO();
-				//System.out.println("클래스 상세보기 주소 : "+itr1.next().attr("href"));
+				System.out.println("클래스 상세보기 주소 : "+itr1.next().attr("href"));
 				try {
 					doc2=Jsoup.connect(url+itr1.next().attr("href")).get();
 				} catch (IOException e) {
@@ -92,9 +92,12 @@ public class Crawling {
 				Iterator<Element> itr3 = e3.iterator();
 				Iterator<Element> itr4 = e4.iterator();
 				Iterator<Element> itr5 = e5.iterator();
+				
+				wdonedayVO.setWdopk(wdopk);
 
-				//System.out.println("클래스 이름 : "+itr2.next().text());
-				wdonedayVO.setWdoname(itr2.next().text()); // 이름
+				String testName = itr2.next().text();
+				System.out.println("클래스 이름 : "+ testName);
+				wdonedayVO.setWdoname(testName); // 이름
 				wdonedayVO.setWdoregion(region.get(i)); // 지역
 				while(itr3.hasNext()) {
 					WdimageVO wdimageVO=new WdimageVO();
@@ -136,10 +139,13 @@ public class Crawling {
 					crawlingDAO.insertWdimage(wdimageVO);
 					wdipk++;
 				}
-				//System.out.println("주소 : "+itr4.next().text());
-				wdonedayVO.setWdoaddress(itr4.next().text()); // 주소
-				//System.out.println("카테고리 : "+itr5.next().text());
-				wdonedayVO.setWdosubject(itr5.next().text()); // 카테고리
+				String testAdd = itr4.next().text();
+				System.out.println("주소 : "+ testAdd);
+				wdonedayVO.setWdoaddress(testAdd); // 주소
+				
+				String testCate = itr5.next().text();
+				System.out.println("카테고리 : "+ testCate);
+				wdonedayVO.setWdosubject(testCate); // 카테고리
 				
 				crawlingDAO.insertWdoneday(wdonedayVO);
 				wdopk++;
